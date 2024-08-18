@@ -1,0 +1,4 @@
+/target
+/info
+*.o
+add_commit_push.sh

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sensor Data</title>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sensor Data</h1>
+    <img id="sensor-plot" src="{{ url_for('plot_png') }}" alt="Sensor Data Plot">
+
+    <script>
+        function refreshPlot() {
+            const plot = document.getElementById('sensor-plot');
+            plot.src = "{{ url_for('plot_png') }}" + "?t=" + new Date().getTime();
+        }
+
+        setInterval(refreshPlot, 5000); // Refresh every 5 seconds
+    </script>
+</body>
+</html>
+
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/plot.png')
+def plot_png():
+    data = get_data()
+    fig = create_figure(data)
+    output = io.BytesIO()
+    fig.savefig(output, format='png')
+    output.seek(0)
+    return send_file(output, mimetype='image/png')
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=9000)
