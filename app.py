@@ -71,44 +71,6 @@ def create_figure(data):
     return fig
 
 
-'''
-def create_figure(data):
-    timestamps = [row[7] for row in data]
-    dht_temp = [row[0] for row in data]
-    dht_hum = [row[1] for row in data]
-    bme_temp = [row[2] for row in data]
-    bme_hum = [row[3] for row in data]
-    bme_press = [row[4] for row in data]
-    ds_temp1 = [row[5] for row in data]
-    ds_temp2 = [row[6] for row in data]
-
-    fig, ax = plt.subplots(3, 1, figsize=(10, 8))
-
-    ax[0].plot(timestamps, dht_temp, label='DHT Temperature')
-    ax[0].plot(timestamps, bme_temp, label='BME Temperature')
-    ax[0].plot(timestamps, ds_temp1, label='DS Temperature 1')
-    ax[0].plot(timestamps, ds_temp2, label='DS Temperature 2')
-    ax[0].set_ylabel('Temperature (°C)')
-    ax[0].legend()
-
-    ax[1].plot(timestamps, dht_hum, label='DHT Humidity')
-    ax[1].plot(timestamps, bme_hum, label='BME Humidity')
-    ax[1].set_ylabel('Humidity (%)')
-    ax[1].legend()
-
-    ax[2].plot(timestamps, bme_press, label='BME Pressure')
-    ax[2].set_ylabel('Pressure (hPa)')
-    ax[2].legend()
-
-    for a in ax:
-        a.set_xlabel('Timestamp')
-        a.legend()
-        a.grid(True)
-
-    fig.autofmt_xdate()
-    return fig
-'''
-
 def get_terminal_output():
     data = get_data()
     
